@@ -28,17 +28,15 @@ void main() {
   // Estamos asumiendo que son varios tipos de comida y varios restaurantes
   for (Map rest in restaurantes) {
     String typeFood = rest["tipo"];
-    // Creamos el Key en caso de que no exista con el primer valor
+    // Creamos el Key en caso de que no exista
     if (rating[typeFood] == null) {
       rating.addAll({typeFood: []});
     }
-    // Caso contrario lo anidamos a los demas List
+    // Anidamos todos los list de estrellas a las listas ya creadas
     rating[typeFood].addAll(rest["calificaciones"]);
-    // Todas las calificaciones deben ser agregadas
+    // Todas las calificaciones deben ser agregadas a una misma lista
     rating["Todos"].addAll(rest["calificaciones"]);
   }
-
-  print(rating);
 
   for (var entry in rating.entries) {
     double promedio = (entry.value.reduce((sum, test) => sum + test)) / entry.value.length;
